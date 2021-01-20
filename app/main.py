@@ -4,7 +4,9 @@ import uvicorn
 
 from app import db, ml, viz
 
-description = "Complete"
+description = "Some description"
+
+"""
 Edit your app's title and description. See [https://fastapi.tiangolo.com/tutorial/metadata/](https://fastapi.tiangolo.com/tutorial/metadata/)
 
 To use these interactive docs:
