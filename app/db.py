@@ -18,7 +18,6 @@ async def get_db() -> sqlalchemy.engine.base.Connection:
     Otherwise uses a SQLite database for initial local development.
     """
     load_dotenv()
-    #database_url = os.getenv('postgresql://dell4:6hB1iSYrtR@db-cityspire-samir.c2uishzxxikl.us-east-1.rds.amazonaws.com:5432/cityspire', default='sqlite:///temporary.db')
     DB_USER=os.getenv("DB_USER")
     DB_PASS=os.getenv("DB_PASS")
     DB_HOST=os.getenv("DB_HOST")
