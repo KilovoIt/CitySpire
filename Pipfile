@@ -11,6 +11,10 @@ pytest = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 sqlalchemy = "*"
+psycopg2-binary = "*"
+ipykernel = "*"
+jupyter = "*"
+pyzmq = "*"
 
 [requires]
 python_version = "3"

@@ -1,7 +1,7 @@
 """Database functions"""
 
 import os
-
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends
 import sqlalchemy
@@ -18,13 +18,28 @@ async def get_db() -> sqlalchemy.engine.base.Connection:
     Otherwise uses a SQLite database for initial local development.
     """
     load_dotenv()
-    database_url = os.getenv('DATABASE_URL', default='sqlite:///temporary.db')
+    #database_url = os.getenv('postgresql://dell4:6hB1iSYrtR@db-cityspire-samir.c2uishzxxikl.us-east-1.rds.amazonaws.com:5432/cityspire', default='sqlite:///temporary.db')
+    DB_USER=os.getenv("DB_USER")
+    DB_PASS=os.getenv("DB_PASS")
+    DB_HOST=os.getenv("DB_HOST")
+    DB_PORT=os.getenv("DB_PORT")
+    DB_NAME=os.getenv("DB_NAME")
+    database_url = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     engine = sqlalchemy.create_engine(database_url)
     connection = engine.connect()
     try:
         yield connection
     finally:
         connection.close()
+
+
+class Place(BaseModel):
+    state: str = 'None'
+    city: str = 'None'
+
+
+class Zip(BaseModel):
+    zip: int
 
 
 @router.get('/info')
@@ -39,7 +54,10 @@ async def get_url(connection=Depends(get_db)):
     url_without_password = repr(connection.engine.url)
     return {'database_url': url_without_password}
 
-@router.get('/hello')
-async def hello():
-    """Returns a friendly greeting 👋"""
-    pass
+@router.get('/get_data')
+async def get_place(place):
+    try:
+        return {'zip': int(place)}
+    except ValueError:
+        return {'city and state': place}
+
