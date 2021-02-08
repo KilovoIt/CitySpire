@@ -4,9 +4,7 @@ import uvicorn
 
 from app import db, ml, viz
 
-description = "Some description"
-
-"""
+description ="""
 Edit your app's title and description. See [https://fastapi.tiangolo.com/tutorial/metadata/](https://fastapi.tiangolo.com/tutorial/metadata/)
 
 To use these interactive docs:
@@ -15,6 +13,8 @@ To use these interactive docs:
 - Edit the Request body or any parameters
 - Click the **Execute** button
 - Scroll down to see the Server response Code & Details
+
+<img src='https://large.shootingsportsmedia.com/388963.jpg'>
 """
 
 app = FastAPI(
